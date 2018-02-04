@@ -1,0 +1,369 @@
+* Introduction
+Polis is a tool for building free, open-source alternatives to proprietary sharing-economy services such as:
+- home-leasing
+- ridesharing
+- p2p internet service
+- anything else peer might be able to provide
+
+It is composed of collections of microservices focused on common goals, called *designs*, which a protocol helps to organize, monetize, deploy, and make discoverable to customers and vendors.
+
+Before we cover the technical details of this tool, let's consider what there is to gain by open-sourcing the software used by sharing-economy services.
+
+In order for a project like this to work, there would need to exist: 1) a tool for coordinating the efforts of developers, vendors, and customers, and 2) incentives for members of these three parties to adopt this tool.
+The rest of this paper will describe such a tool.  Before we describe this tool in detail, it would make sense to consider whether or not a need for such a tool exists.  From the points of view of the three mentioned before as well as other interested parties, it seems clear
+that a vacuum exists in which a framework enabling such an open-source project would be in high demand.  Let's consider each of these points of view:
+** Parties
+*** Customers
+Given the success of platform business models, it should be assumed that users of these services appreciate them and convincing them to switch from one service/app to another would
+require the newcomer to have substantial perks.  A service in any given market, if it runs free software developed by an open-source community can offer a few things that
+non-free choices cannot:
+**** Price
+**** Privacy
+**** Respect
+*** Vendors
+Most platform businesses we're familiar with consist of two sides: a material infrastructure and a software infrastructure.  The novelty introduced by the platform business model
+is in bringing ownership of the material infrastructure -- the cars driving the rideshares, the houses used for p2p leases -- outside of the company itself.  Vendors are those who
+create value by providing these services in lieu of a central business that would normally be responsible for the value creation.  This gives
+
+*** Developers
+*** Investors
+Investors considering the profitability of the Polis model face a similar proposition faced by those confronted by early platform models before they had been proved in the world.   Relegating ownership of a significant share of the means of production
+surely seemed radical enough, as this traditionally equated to revenue.  Now, Polis proposes a similar change, with similar predictions of its effect on the world.  Given the benefit posed to
+users, the profit will come from exponential growth of the user base that would be inconceivable with a pipeline business model from the supply side alone.  This growth relates directly to
+profit, since the coin's increasing use directly reflects value.
+**** Utility First
+**** Future-Proof Asset
+
+** Coordination Games
+*** The Stag
+#+BEGIN_QUOTE
+...a group of hunters have tracked a large stag, and found it to follow a certain path. If all the hunters work together, they can kill the stag and all eat. If they are discovered, or do not cooperate, the stag will flee, and all will go hungry.
+
+The hunters hide and wait along a path. An hour goes by, with no sign of the stag. Two, three, four hours pass, with no trace. A day passes. The stag may not pass every day, but the hunters are reasonably certain that it will come. However, a hare is seen by all hunters moving along the path.
+
+If a hunter leaps out and kills the hare, he will eat. However, it results in the trap laid for the stag to be wasted, and the others will starve. There is no certainty that the stag will arrive; the hare is present. The dilemma is that if one hunter waits, he risks one of his fellows killing the hare for himself, sacrificing everyone else. This makes the risk twofold; risk the stag never coming, or risk another man taking the kill.
+#+END_QUOTE
+
+This classic game explains the dilemma developers find themselves in when collaborating on projects of non-trivial complexity.  Because the chances for defection grow with the added complexity of the project, large undertakings typically go unaccomplished.  Yet, the existence of plenty of successful projects requires us to update our game to reflect the choices software developers realistically have before them.
+
+| Stag Hunt | complex architecture     |
+|-----------+--------------------------|
+| hunters   | developers               |
+|           |                          |
+|-----------+--------------------------|
+| stag      | complex, very profitable |
+|           | project                  |
+|-----------+--------------------------|
+| hare      | simple, somewhat         |
+|           | profitable project       |
+|-----------+--------------------------|
+
+#+BEGIN_QUOTE
+The chief of the hunters' tribe, knowing that his hunters are prone to distraction, ensures them that they will be rewarded regardless of whether or not they bring home a stag, under the strict condition that they
+hunt for the stag and do not allow themselves to be distracted.
+#+END_QUOTE
+
+It seems that problem of defection is practically solved.  But a new problem exists, if it didn't already: there is now the need for a powerful chief who has more
+influence and resources than others.  This is a familiar part of all human cultures and its efficacy cannot be disputed -- but as the complexity of undertakings increases, so does the power in the hands of the central authority.  Thus, this
+model does not tend to promote egalitarian principles, and most societies sooner or later find it necessary to curb the power of the ruling class.  With this in mind, we'll develop our scenario by consindering another possible solution to the coordination dilemma:
+
+#+BEGIN_QUOTE
+The Chief's power to reward and punish is effective in enabling coordination among his subjects, but it  requires a lopsided distribution of resources.  His subject, not least of these the hunters, begin to wonder whether the central decision maker is worth the added inequality.  But no one can deny that there is
+less risk of starvation than before, and going back to the old ways is also not an answer.
+
+#+END_QUOTE
+
+It brings together a community of developers to produce services like those offered by platform companies -- but unencumbered by any large organizations requiring revenue, which makes makes costs go up for consumers and profits down for vendors.
+
+Developers are incentivized to collaborate on these services because the fees collected from customer's use of the services, which would normally go to supporting the organization
+that owns the software, goes straight into the developers' accounts.  This creates the opportunity for more pay for developers, which makes for better software.
+
+*** The Chief
+*** The Tooth
+*** The Shell
+** Properties
+Having considered the possibility of a free, open-source platform business from the point of view of coordination games, we will now list some desirable properties that should be part of an effective system.
+*** Free
+
+*** Unified
+The most useful services require very large amounts of coordination and cooperation in order to be performant.  If a situation arises where developers tend to prefer working on smaller projects because they aren't sure larger projects
+can be finished, then no one wins.
+In order to encourage cooperation between developers, the Polis Protocol specifies a set of definitions.
+*** Extensible
+The definitions below must leave room for updates.
+*** Layered
+The protocol must be layered, i.e. centered around well-defined services meant to provide a minimal set of capabilities.  With this set of capabilities defined, different solutions
+to achieving these capabilities can be interchanged.
+*** Monetized
+
+** Using Polis
+
+There are two primary, non-mutually-exclusive ways to interact with Polis:
+1) as a customer or vendor of services available on an app that uses the Polis protocol (infrastructure *user*)
+2) as a developer of services (infrastructure *builder*)
+
+* Designs
+** Definitions
+A design is an ensemble of microservices that are meant to achieve certain goals determined by user needs.  Every design contains the following elements:
+*** Role
+A role is the part played by a user in the implementation of a design.  For example,
+- Buyer and Seller are roles of the Offer design
+- Reporter and Reader are roles of the News design
+- Driver, Restaurant, Customer are roles of the Offer/Transportation/Food Delivery design.
+
+Roles may inherit from other roles.  The Food Delivery design has access to the driver role from ~Offer/Transportation~, for instance.  If is also possible to
+create a role that inherits all of its attributes and methods from another and is distinct in name only -- such as the customer role -- which behaves exactly like
+Buyer.
+
+*** Goal
+A goal is what motivates a user to play a role.  Goals serve to coordinate developer activity.
+****
+| Design | Role | Goal |
+|--------+------+------|
+|        |      |      |
+|--------+------+------|
+|        |      |      |
+**** Common Goals
+*** Action
+Actions are events that can be initiated by a user playing a specific role.  For the role Evaluator, for instance, the action *evaluate task* applies.
+| Design | Role | Goal |
+|--------+------+------|
+|        |      |      |
+|--------+------+------|
+|        |      |      |
+*** Prerequisite
+Prerequisites are requirements that must be fulfilled before an action becomes available to a user.  A driver role may need a require verification of driver's license and insurance, for instance.
+
+*** Association
+Associations grant access of features of one design to another.  `Rideshare` inherits from `Offer`, for instance, and therefore must use the terms
+`Consumer` and `Producer` in the same sense that offers do.
+** Meta
+Meta-designs are a special set of designs that are meant to serve as building blocks for all future designs.  Every design must be associated to at least one meta design.
+*** Proposal
+| Role      | Goal                        | Actions        | Prerequisites |
+|-----------+-----------------------------+----------------+---------------|
+| Manager   | specify the requirements of | makeProposal   |               |
+|           | a design                    |                |               |
+|-----------+-----------------------------+----------------+---------------|
+| Worker    | fulfill the requirements of | submitWork     |               |
+|           | a design                    |                |               |
+|-----------+-----------------------------+----------------+---------------|
+| Evaluator | test the requirements of    | submitApproval; |               |
+|           | a design                    | submitRejection |               |
+*** Token
+*** Offer
+*** Contract
+*** Product
+*** Organization
+To be designed.
+*** Government
+To be designed.
+** Object
+*** Internet
+*** Energy
+*** Insurance
+*** Ridesharing
+*** News
+*** Crowdfund
+*** Identity
+* Layers
+** Proposal
+#+BEGIN_SRC javascript
+{
+    proposal: {
+        title: {"type": "string"}, // "proposal"
+        path: {"type": "string"}, // "design/proposal"
+        phase: {"type": "integer"}, // 6
+        role: [
+            {
+                title: {"type": "string"}, // "manager"
+                address: {"type": "string"}
+            }
+        ],
+        association: [
+            {
+                path: "design/contract",
+            }
+        ],
+        design: {"type": "string"} // address of design document
+    }
+}
+#+END_SRC
+** Design
+#+BEGIN_SRC javascript
+{
+    design: {
+        path: "design/",
+        feature: {"type": "string"} // address to .feature file
+        role: [
+            {
+                title: {"type": "string"},
+                actions: [
+                    {
+                        title: {"type": "string"}, // "makeOffer",
+                        contract: {
+                            path: {"type": "string"},
+                            address: {"type": "string"}
+                        },
+                        presentation: {
+                            address: {"type": "string"} // address of custom element
+                        },
+                        prerequisites: [
+                            {
+                                title: {"type": "string"},
+                                view: {"type": "string"}, // address of view function returning boolean
+                            }
+                        ],
+                        stake: {
+                            start: {"type": "integer"}, // funds required to begin negotiating
+                            goal: {"type": "integer"}, // funds required to begin development
+                            min: {"type": "integer"}, // lower limit for contributing funds
+                            max: {"type": "integer"}, // upper limit for contributing funds
+                        },
+                        dividends: {
+                            manager: {"type": "integer"}, //
+                            worker: {"type": "integer"}, //
+                            evaluator: {"type": "integer"} //
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
+#+END_SRC
+
+** Storage
+The storage layer is where any resources are stored that must be retrieved for use in the presentation and/or contract layers.
+*** .feature
+A Gherkin file describing the use of a design.
+#+BEGIN_SRC gherkin
+Feature: Account Holder withdraws cash
+
+  Scenario: Account has sufficient funds
+   Given the account balance is $100
+     And the card is valid
+     And the machine contains enough money
+    When the Account Holder requests $20
+    Then the ATM should dispense $20
+     And the account balance should be $80
+     And the card should be returned
+#+END_SRC
+*** .sol
+A Solidity file
+#+BEGIN_SRC solidity
+pragma solidity ^0.4.0;
+
+contract Coin {
+    // The keyword "public" makes those variables
+    // readable from outside.
+    address public minter;
+    mapping (address => uint) public balances;
+
+    // Events allow light clients to react on
+    // changes efficiently.
+    event Sent(address from, address to, uint amount);
+
+    // This is the constructor whose code is
+    // run only when the contract is created.
+    function Coin() public {
+        minter = msg.sender;
+    }
+
+    function mint(address receiver, uint amount) public {
+        if (msg.sender != minter) return;
+        balances[receiver] += amount;
+    }
+
+    function send(address receiver, uint amount) public {
+        if (balances[msg.sender] < amount) return;
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        Sent(msg.sender, receiver, amount);
+    }
+}
+
+#+END_SRC
+*** .js
+A JavaScript file that generates a custom element with custom styling and functionality, which serves as an interface between a user and a smart contract.
+#+BEGIN_SRC javascrip
+class TacoButton extends HTMLElement {
+  static get observedAttributes() { return ["disabled"]; }
+
+  constructor() {
+    super();
+
+    this.addEventListener("keydown", e => {
+      if (e.keyCode === 32 || e.keyCode === 13) {
+        this.dispatchEvent(new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true
+        }));
+      }
+    });
+
+    this.addEventListener("click", e => {
+      if (this.disabled) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    this._observer = new MutationObserver(() => {
+      this.setAttribute("aria-label", this.textContent);
+    });
+  }
+
+  connectedCallback() {
+    this.setAttribute("role", "button");
+    this.setAttribute("tabindex", "0");
+
+    this._observer.observe(this, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+
+  disconnectedCallback() {
+    this._observer.disconnect();
+  }
+
+  get disabled() {
+    return this.hasAttribute("disabled");
+  }
+
+  set disabled(v) {
+    if (v) {
+      this.setAttribute("disabled", "");
+    } else {
+      this.removeAttribute("disabled");
+    }
+  }
+
+  attributeChangedCallback() {
+    // only is called for the disabled attribute due to observedAttributes
+    if (this.disabled) {
+      this.removeAttribute("tabindex");
+      this.setAttribute("aria-disabled", "true");
+    } else {
+      this.setAttribute("tabindex", "0");
+      this.setAttribute("aria-disabled", "false");
+    }
+  }
+}
+#+END_SRC
+
+** Contract
+** Exchange
+
+* Proposal Lifecycle
+** Create
+** Negotiate
+** Fund
+** Develop
+** Evaluate
+** Activate
+** Destroy
+
+* The Meta-meta Design
